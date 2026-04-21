@@ -153,29 +153,25 @@ def build_match_table_html(result: PairResult) -> str:
         else:
             score_color = "#facc15"
 
-        rows.append(f"""
-        <tr style='border-bottom:1px solid #2a2a3e'>
-          <td style='padding:8px;color:#a78bfa;text-align:center'>{i}</td>
-          <td style='padding:8px;color:#e0e0f0'>{html_lib.escape(pair.sentence_a)}</td>
-          <td style='padding:8px;color:#e0e0f0'>{html_lib.escape(pair.sentence_b)}</td>
-          <td style='padding:8px;text-align:center;font-weight:700;color:{score_color}'>{pct:.1f}%</td>
-        </tr>
-        """)
+        rows.append(f"""<tr style='border-bottom:1px solid #2a2a3e'>
+  <td style='padding:8px;color:#a78bfa;text-align:center'>{i}</td>
+  <td style='padding:8px;color:#e0e0f0'>{html_lib.escape(pair.sentence_a)}</td>
+  <td style='padding:8px;color:#e0e0f0'>{html_lib.escape(pair.sentence_b)}</td>
+  <td style='padding:8px;text-align:center;font-weight:700;color:{score_color}'>{pct:.1f}%</td>
+</tr>""")
 
     # ⚠️  FIX: renamed `html` → `table_html` to avoid shadowing the stdlib module
-    table_html = f"""
-    <table style='width:100%;border-collapse:collapse;background:#12121f;border-radius:8px;overflow:hidden'>
-      <thead>
-        <tr style='background:#1e1e3f'>
-          <th style='padding:10px;color:#a78bfa'>#</th>
-          <th style='padding:10px;color:#a78bfa;text-align:left'>{html_lib.escape(result.doc_a)} — sentence</th>
-          <th style='padding:10px;color:#a78bfa;text-align:left'>{html_lib.escape(result.doc_b)} — sentence</th>
-          <th style='padding:10px;color:#a78bfa'>Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        {"".join(rows)}
-      </tbody>
-    </table>
-    """
+    table_html = f"""<table style='width:100%;border-collapse:collapse;background:#12121f;border-radius:8px;overflow:hidden'>
+  <thead>
+    <tr style='background:#1e1e3f'>
+      <th style='padding:10px;color:#a78bfa'>#</th>
+      <th style='padding:10px;color:#a78bfa;text-align:left'>{html_lib.escape(result.doc_a)} — sentence</th>
+      <th style='padding:10px;color:#a78bfa;text-align:left'>{html_lib.escape(result.doc_b)} — sentence</th>
+      <th style='padding:10px;color:#a78bfa'>Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    {"".join(rows)}
+  </tbody>
+</table>"""
     return table_html
